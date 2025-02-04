@@ -57,22 +57,22 @@ t_node	*find_min(t_node *stack) //Define a function that searches a stack and re
 	return (min_node); 
 }
 
-t_node	*find_max(t_node *stack) //Define a function that searches a stack and returns the node with the biggest number
+t_node	*find_max(t_node *stack)//busca en la pila y devuelve un puntero que apunta al nodo con el numero mas grande
 {
-	long			max; //To store the biggest value so far
-	t_node	*max_node; //To store a pointer that points to the biggest number
+	long			max;
+	t_node	*max_node;//se crea un puntero que apunta al nodo con el numero mas grande. Este puntero es el que se devuelve a la funcion que llamo a find_max
 
 	if (!stack)
 		return (NULL);
-	max = LONG_MIN; //Assign to the biggest value so far, the max long integer
-	while (stack) //Loop until the end of the stack is reached
+	max = LONG_MIN; //asignamos a max el menor valor posible para un long. Asi nos aseguramos de que cualquier número en la lista será mayor que LONG_MIN, permitiendo actualizar max correctamente al recorrer los valores.
+	while (stack) //continuamos hasta que stack apunta a null
 	{
-		if (stack->value > max) //Check if the current node value is smaller than the biggest so far
+		if (stack->value > max) //comprobamos que el valor en el nodo sea mayor que el valor de max
 		{
-			max = stack->value; //If so, update the biggest number so far
-			max_node = stack; //Set the pointer to point to the node with the biggest number so far
+			max = stack->value; //si es mayor que max entonces actualizamos max para que su valor sea el vamor del campo value del nodo
+			max_node = stack; //actualizamos tambien el puntero max_node para que apunta al nodo que contiene el numero mas alto
 		}
-		stack = stack->next; //Move to the next node for processing
+		stack = stack->next; //actualizamos stack para seguir moviendonos por la pila
 	}
-	return (max_node);
+	return (max_node);//devolvemos el puntero que apunta al nodo con el numero mas alto
 }

@@ -54,6 +54,7 @@ static void append_node(t_node **stack, int n)//static void: no devuelve y tiene
         //Así, last_node se convierte en un puntero al último nodo de la pila.
         t_node *last_node = find_last(*stack); // NUEVA LINEA. a la funcion find_last le envío un puntero al primer nodo de la pila, es decir, el valor de *stack.
         //last_node = find_last(*stack);ANTIGUA LINEA.
+        //enviamos *stack, un puntero al primer nodo de la pila, y usamos solo un * ya que la funcion solo necesita leer la pila o recorrerla sin cambiar la direccion del puntero principal
         last_node->next = node;//Así conseguimos que el ultimo nodo de la fila apunte al ultimo creado
         node->prev = last_node;//Aquí lo que hacemos es que el ultimo creado apunte al que era ultimo de la fila
         //De este modo, ambos nodos se estan apuntando, es decir, están doblemente enlazados.

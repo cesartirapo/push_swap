@@ -1,33 +1,33 @@
 #include "../../inc/push_swap.h"
-static void	rotate(t_node **stack) //Define a function that rotates the stack's top node to the bottom of the stack
+static void	rotate(t_node **stack) //funcion que hace rotar al primer nodo de la pila al final de la pila
 {
-	t_node	*last_node; //To store a pointer to the last node of a stack
+	t_node	*last_node; //puntero que apuntara al ultimo nodo
 
-	if (!*stack || !(*stack)->next) //Check if the stack is empty, or if there's one node
+	if (!*stack || !(*stack)->next) //comprobamos si stack apunta "a" apunta a null, es decir que la pila esta vacia, o si solo hay un nodo
 		return ;
-	last_node = find_last(*stack); 
-	last_node->next = *stack; //Assign to the last node, its `next` attribute as the top node, effectively setting the current top node as the last node
-	*stack = (*stack)->next; //Assign to the pointer of the top node, the node after it (second from the top)
-	(*stack)->prev = NULL; //Complete setting the current top node by detaching it from its previous top node
-	last_node->next->prev = last_node; //Reconnect the second node's prev pointer to point to what was previously the last node in the stack
-	last_node->next->next = NULL; //Assign to the `next` attribute of the current last node, `NULL` effectively setting it as the current last node, and properly null terminating the stack
+	last_node = find_last(*stack);//enviamos "stack" a find_last para que nos envie un puntero que apunte al ultimo nodo. Lo enviamos con un * porque no queremos modificar el valor de "a" o "stack", solo queremos movernos por la pila
+	last_node->next = *stack; //hacemos que el campo next del ultimo nodo ahora apunte al nodo que estamos rotando al final de la pila
+	*stack = (*stack)->next; //actualizamos stack para que apunte al segundo nodo. FIJATE EN COMO SE DESREFERENCIA CON (*stack)
+	(*stack)->prev = NULL; //stack ahora apunta al que era el segundo nodo, por lo que tenemos que hacer que su campo prev ahora sea null, ya que apuntes apuntaba al primer nodo
+	last_node->next->prev = last_node; //hacemos que el campo prev del nuevo ultimo nodo ahora apunte al ultimo nodo
+	last_node->next->next = NULL; //terminamos la configuracion del stack haciendo que el campo next del nuevo ultimo nodo apunte a null
 }		
 
-void	ra(t_node **a, bool print) //Rotate the top `a` node to the bottom of the stack, and print the instruction
+void	ra(t_node **a, bool print)//la funcion recibe un puntero doble a la cabeza de la pila que luego lo envia a rotate. Es doble porque hay que modificar el valor de a
 {
 	rotate(a);
 	if (!print)
 		printf("ra\n");
 }
 
-void	rb(t_node **b, bool print) //Rotate the top `b` node to the bottom of the stack, and print the instruction
+void	rb(t_node **b, bool print)
 {
 	rotate(b);
 	if (!print)
 		printf("rb\n");
 }
 
-void	rr(t_node **a, t_node **b, bool print) //Stimultaneously rotate both the top `a` and `b` nodes to the bottom of the stack, and print the instruction
+void	rr(t_node **a, t_node **b, bool print)
 {
 	rotate(a);
 	rotate(b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirapo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ctirapo- <ctirapo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:59:42 by ctirapo-          #+#    #+#             */
-/*   Updated: 2025/01/22 17:42:43 by ctirapo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:05:33 by ctirapo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void			pb(t_node **b, t_node **a, bool print);
 
 //***Algorithm
 void			sort_three(t_node **a);
-void			sort_turk(t_node **a, t_node **b); //Turk algorithm
+void			sort_turk(t_node **a, t_node **b, int len_a); //Turk algorithm
 #endif

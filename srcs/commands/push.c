@@ -1,36 +1,36 @@
 #include "../../inc/push_swap.h"
-static void	push(t_node **dst, t_node **src) //Define a function that pushes a top node, from one stack to another's top node
+static void	push(t_node **dst, t_node **src) //Funcion que empuja el primer nodo de una pila a la primera posicion de la otra pila
 {
-	t_node	*push_node; //Used to store the pointer to the node to be pushed
+	t_node	*push_node; //creamos un puntero que apuntara a la cabeza de la pila src, es decir, al nodo que queremos mover
 
-	if (!*src) //The top node of a stack to be pushed
+	if (!*src) //si la pila desde donde queremos mover esta vacia, es decir si el puntero src apunta a null
 		return ;
-	push_node = *src; //The top node to push is assigned to the `t_stack_node` variable
-	*src = (*src)->next; //Move the pointer of the stack to the next node, which will become the next `top node` after the node before is "popped off"
-	if (*src) //Check if the current node exists
-		(*src)->prev = NULL; //Set the current node as the head of the stack
-	push_node->prev = NULL; //Detach the node to push from its stack
-	if (!*dst) //Check if the other stack is empty
+	push_node = *src; //el puntero push_node apunta al nodo cabeza de la pila src 
+	*src = (*src)->next; //ahora el puntero que apunta a la cabeza de la pila src apunta a la direccion que aparece en el campo next del nodo que era cabeza, es decir, al nuevo primer nodo
+	if (*src) //si ese campo next apunta a otro nodo, un segundo nodo en esa pila 
+		(*src)->prev = NULL; //actualizamos en null em campo prev del nuevo primer nodo de la pila src
+	//ATENCION. push_node->prev = NULL; //no creo que haga falta esta linea porque el campo prev de push_node siempre es null, ya que push_node apunta al primer nodo de la pila src
+	if (!*dst) //comprobamos si la pila de destino esta vacia
 	{
-		*dst = push_node; //If it's empty, assign as the first node of that stack, the node we want pushed
-		push_node->next = NULL; //Ensure it is also set as the last node, e.g. properly null terminate the stack
+		*dst = push_node; //Si esta vacia, el puntero que apunta a la cabeza de la pila b ahora apunta al primer puntero de la pila a
+		push_node->next = NULL; //ademas como es el unico nodo de la lista, su campo next debe apuntar a null
 	}
-	else //If the other stack we want to push to is not empty
+	else //si la pila de destino no esta vacia
 	{
-		push_node->next = *dst; //Assign the node to push, to the top of the current top node of the stack
-		push_node->next->prev = push_node; //Assign to the "second node" `prev` attribute, the pushed node as the current top node
-		*dst = push_node; //Complete appending the node. The pointer to the top node of the stack is now pointing to our recently pushed node
+		push_node->next = *dst; //el campo next del nodo que vamos a mover ahora apunta al primer nodo de la pila de destino
+		push_node->next->prev = push_node; //el campo prev del nuevo segundo nodo de la pila dst ahora apunta al nodo que hemos movido
+		*dst = push_node; //el puntero que apunta a la cabeza de la pila dst ahora apunta al nuevo primer nodo de dst
 	}
 }
 
-void	pa(t_node **a, t_node **b, bool print) //Push on top of `b`, the top `a` and print the instruction
+void	pa(t_node **a, t_node **b, bool print) //Empuja encima de a el primer nodo de b
 {
 	push(a, b); 
 	if (!print) 
 		printf("pa\n");
 }
 
-void	pb(t_node **b, t_node **a, bool print) //Push on top of `a`, the top `b` and print the instruction
+void	pb(t_node **b, t_node **a, bool print) //Empuja encima de b el primer nodo de a
 {
 	push(b, a);
 	if (!print)

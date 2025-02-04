@@ -13,16 +13,16 @@ static void	swap(t_node **head)
 	(*head)->prev = NULL; //Se actualiza el campo prev del nuevo primer nodo para que sea NULL
 }
 
-void	sa(t_node **a, bool print) //la funcion recibe un puntero doble a la cabeza de la pila
+void	sa(t_node **a, bool print) //la funcion recibe un puntero doble a la cabeza de la pila que luego lo envia a swap. Es doble porque hay que modificar el valor de a
 {
-	swap(a);//llama a swap para swapear los dos primeros numeros de la pila a
-	if (!print)//si print es false se imprime
+	swap(a);
+	if (!print)
 		printf("sa\n");
 }
 
 void	sb(t_node **b, bool print)
 {
-	swap(b);//swapear los dos primeros  numeros de la pila b
+	swap(b);
 	if (!print)
 		printf("sb\n");
 }

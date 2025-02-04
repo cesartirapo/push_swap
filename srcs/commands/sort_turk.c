@@ -54,11 +54,8 @@ static void	min_on_top(t_node **a) //Define a function that moves the smallest n
 	}
 }
 
-void	sort_turk(t_node **a, t_node **b) //Define a function that sorts stack `a` if it has more than 3 nodes
+void	sort_turk(t_node **a, t_node **b, int len_a) //funcion que ordena cuando tenemos mas de 3 numeros en la pila a
 {
-	int	len_a; //To store the length of stack `a`
-
-	len_a = stack_len(*a);
 	if (len_a-- > 3 && !stack_sorted(*a)) //If stack `a` has more than three nodes and aren't sorted
 		pb(b, a, false);
 	if (len_a-- > 3 && !stack_sorted(*a)) //If stack `a` still has more than three nodes and aren't sorted
@@ -77,3 +74,22 @@ void	sort_turk(t_node **a, t_node **b) //Define a function that sorts stack `a` 
 	current_index(*a); //Refresh the current position of stack `a`
 	min_on_top(a); //Ensure smallest number is on top
 }
+/*
+void	sort_turk(t_node **a, t_node **b, int len_a) //funcion que ordena cuando tenemos mas de 3 numeros en la pila a
+{
+	//antigua linea porque esto se comprueba en la main: if (len_a-- > 3 && !stack_sorted(*a)) //If stack `a` has more than three nodes and aren't sorted
+	//nueva linea:
+	while (len_a-- > 3)//lo hacemos hasta que en a solo queden 3 nodos
+		pb(b, a, false);//push b y movemos los nodos desde "a" hasta "b"
+	sort_three(a); // Ordena los 3 elementos restantes en 'a'
+	
+	while (*b) // Mueve los nodos de 'b' de vuelta a 'a'
+	{
+		init_nodes_b(*a, *b);
+		move_b_to_a(a, b);
+	}
+	
+	current_index(*a);
+	min_on_top(a);
+}
+*/

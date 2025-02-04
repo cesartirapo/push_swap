@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctirapo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ctirapo- <ctirapo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:43:24 by ctirapo-          #+#    #+#             */
-/*   Updated: 2025/01/22 18:29:06 by ctirapo-         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:04:48 by ctirapo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@ int	main(int ac, char **av)
 {
 	t_node	*a;//a es un puntero a una estructura de tipo t_node
 	t_node	*b;
+	int	len_a;
 	a = NULL;
 	b = NULL;
 	//ambos punteros se inician en NULL para que las pilas estén vacías.
@@ -33,15 +34,16 @@ int	main(int ac, char **av)
 	
 	//Una vez creada nuestra pila con todos los numeros comprobamos si éstos están ordenados.
 	//stack_sorted está en stack_utils.c
+	len_a = stack_len(a);
 	if(!stack_sorted(a))//;primero que queremos comprobar es si el stack esta ordenado. Si no lo esta usamos los algoritmos siguientes.
 	{
-		if(stack_len(a) == 2)//si tenemos solo dos numeros simplemente los swapeamos
+		if(len_a == 2)//si tenemos solo dos numeros simplemente los swapeamos
 			sa(&a, false);//Aquí enviamos &a porque no es un puntero doble, como sí lo es por ejemplo en la funcion init_stack_a, que envia "a" a otras funciones sin "&"
 		//además, al enviar &a a la función sa, estás pasando la dirección de memoria del puntero a, no el contenido de la pila en sí. Esto es necesario porque quieres que la función swap (y por extensión sa) pueda modificar directamente la cabeza de la pila a.
-		else if(stack_len(a) == 3)//si tenemos 3 numeros usamos el sort 3 algoritmo 
+		else if(len_a == 3)//si tenemos 3 numeros usamos el sort 3 algoritmo 
 			sort_three(&a);//enviamos la dirección de a para modificar este puntero fuera de la función
 		else
-			sort_turk(&a, &b);//si tenemos mas de 3 usamos el algoritmo Turk
+			sort_turk(&a, &b, len_a);//si tenemos mas de 3 usamos el algoritmo Turk. Al ser a y b punteros simples, enviamos &a y &b, es decir, las direcciones de los punteros a y b para que puedan ser modificados por las funciones a las que se envian
 	}
 	free_stack(&a);//finalmente limpiamos la pila.
 	return (0);	
