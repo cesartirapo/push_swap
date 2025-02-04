@@ -1,6 +1,4 @@
-
-#include "push_swap.h"
-
+#include "../../inc/push_swap.h"
 static int	count_words(char *s, char c)
 {
 	int	word_count;
@@ -19,7 +17,7 @@ static int	count_words(char *s, char c)
 				i++;
 		}
 	}
-	return (word_count)
+	return (word_count);
 }
 
 static char	*get_next_word(char *s, char c)
@@ -30,6 +28,8 @@ static char	*get_next_word(char *s, char c)
 	int	len;
 	int	j;
 
+	next_word = NULL;
+	j = 0;
 	while(s[i] == c)
 		i++;
 	if(s[i] != '\0')
@@ -59,7 +59,8 @@ char	**split(char *s, char c)
 	word_count = count_words(s, c);
 	if(!word_count)//si no ha contado ninguna palabra
 		exit(1);//mensaje de error
-	result_array = malloc(sizeof(char *) * (size_t)(word_count + 2));//aqui se crea un array de punteros. Lo que no se es porque sumamos dos al numero total de numeros encontrados
+	result_array = malloc(sizeof(char *) * (size_t)(word_count + 2));//aqui se crea un array de punteros.
+	//sumamos dos al numero total de numeros encontrados porque we want to mimic the argument vector of the program. El primer puntero apuntará a una cadena vacía en lugar de apuntar al nombre del programa
 	//La creación de un puntero extra tiene sentido, ya que sirve para marcar el final del array y saber dónde detenerse al recorrerlo
 	//puedes investigar mas sobre el uso de (size_t), aunque parece que en este ejercicio solo se escribe por buenas practicas
 	if(!result_array)
@@ -81,7 +82,7 @@ char	**split(char *s, char c)
 		}
 		word_count--; //se decremena word_count al final de cada iteracion
 	}
-	result_array[i] = NULL;//Si tuvieramos 2 numeros (dos palabras). El primer puntero hemos dicho que apunta al caracter nulo. El segundo y tercer puntero apuntarias a las dos palabras conseguidas co get_next_word.
+	result_array[i] = NULL;//Si tuvieramos 2 numeros (dos palabras). El primer puntero hemos dicho que apunta al caracter nulo. El segundo y tercer puntero apuntarias a las dos palabras conseguidas con get_next_word.
 	//Y el ultimo puntero apuntaria a NULL, lo que indica el final del array de palabras. Por eso reservamos con malloc words_count + 2
 	return(result_array);
 }
