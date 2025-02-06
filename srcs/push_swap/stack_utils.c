@@ -1,4 +1,42 @@
 #include "../../inc/push_swap.h"
+
+void print_piles(t_node *a, t_node *b)
+{
+	    // Imprimir pila a si tiene nodos
+    if (a)
+    {
+        t_node *current = a;
+        printf("Pila A: ");
+        while (current)
+        {
+            printf("%d ", current->value);
+            current = current->next;
+        }
+        printf("\n");
+    }
+    else
+    {
+        printf("no changes in stack A\n");
+    }
+
+    // Imprimir pila b si tiene nodos
+    if (b)
+    {
+        t_node *current = b;
+        printf("Pila B: ");
+        while (current)
+        {
+            printf("%d ", current->value);
+            current = current->next;
+        }
+        printf("\n");
+    }
+    else
+    {
+        printf("no changes in stack b or end of the program\n");
+    }
+}
+
 int	stack_len(t_node *stack) //Calculamos el numero de nodos que hay en el stack
 {
 	int	count;

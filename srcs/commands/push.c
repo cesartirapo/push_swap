@@ -28,6 +28,7 @@ void	pa(t_node **a, t_node **b, bool print) //Empuja encima de a el primer nodo 
 	push(a, b); 
 	if (!print) 
 		printf("pa\n");
+	print_piles(*a, *b);
 }
 
 void	pb(t_node **b, t_node **a, bool print) //Empuja encima de b el primer nodo de a
@@ -35,4 +36,5 @@ void	pb(t_node **b, t_node **a, bool print) //Empuja encima de b el primer nodo 
 	push(b, a);
 	if (!print)
 		printf("pb\n");
+	print_piles(*a, *b);
 }

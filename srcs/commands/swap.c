@@ -18,6 +18,7 @@ void	sa(t_node **a, bool print) //la funcion recibe un puntero doble a la cabeza
 	swap(a);
 	if (!print)
 		printf("sa\n");
+	print_piles(*a, NULL);
 }
 
 void	sb(t_node **b, bool print)
@@ -25,6 +26,7 @@ void	sb(t_node **b, bool print)
 	swap(b);
 	if (!print)
 		printf("sb\n");
+	print_piles(NULL, *b);
 }
 
 void	ss(t_node **a, t_node **b, bool print)
@@ -33,4 +35,5 @@ void	ss(t_node **a, t_node **b, bool print)
 	swap(b);
 	if (!print)
 		printf("ss\n");
+	print_piles(*a, *b);
 }

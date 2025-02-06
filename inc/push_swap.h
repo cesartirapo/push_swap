@@ -6,7 +6,7 @@
 /*   By: ctirapo- <ctirapo-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:59:42 by ctirapo-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:05:33 by ctirapo-         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:19:51 by ctirapo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_node			*get_cheapest(t_node *stack); //Get the cheapest node of a stack
 void			prep_for_push(t_node **s, t_node *n, char c); //Prep the required nodes on top for pushing
 
 //***Stack utils
+void			print_piles(t_node *a, t_node *b);//BORRALA
 int				stack_len(t_node *stack); //Calculate the length of a stack
 t_node			*find_last(t_node *stack); //Find the last node of a stack
 bool			stack_sorted(t_node *stack); //To check whether a stack is sorted

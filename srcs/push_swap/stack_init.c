@@ -97,38 +97,3 @@ Enviar a (puntero doble t_node **a): Cuando envías a, estás enviando un punter
 Enviar *a (puntero simple t_node *a): Cuando envías *a, estás pasando el puntero al primer nodo de la lista (es decir, el valor al que apunta a). Esto es útil cuando solo necesitamos trabajar con los datos o la estructura a la que apunta el puntero. No estamos modificando la dirección de memoria de a, sino que simplemente accedemos o modificamos los nodos de la lista. Esto ocurre en funciones como error_duplicate, que verifican los elementos de la lista sin cambiar la cabeza de la lista.
 */
 //Una vez creada nuestra pila con todos los numeros, volvemos a la función main.
-t_node	*get_cheapest(t_node *stack) //Define a function that searches for the cheapest node, that is set by bool
-{
-	if (!stack)
-		return (NULL);
-	while (stack)
-	{
-		if (stack->cheapest)
-			return (stack);
-		stack = stack->next;
-	}
-	return (NULL);
-}
-
-void	prep_for_push(t_node **stack,
-						t_node *top_node,
-						char stack_name) //Define a function that moves the required node to the top of the stack
-{
-	while (*stack != top_node) //Check if the required node is not already the first node
-	{
-		if (stack_name == 'a') //If not, and it is stack `a`, execute the following
-		{
-			if (top_node->above_median)
-				ra(stack, false);
-			else
-				rra(stack, false);
-		}
-		else if (stack_name == 'b') //If not, and it is stack `b`, execute the following
-		{
-			if (top_node->above_median)
-				rb(stack, false);
-			else
-				rrb(stack, false);
-		}	
-	}
-}

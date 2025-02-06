@@ -1,35 +1,35 @@
 #include "../../inc/push_swap.h"
-static void	set_target_b(t_node *a, t_node *b) //Define a function that sets for the current `a` node, its target node from stack `a`
+static void	set_target_b(t_node *a, t_node *b) //buscamos el target node para los nodos de b en la pila a
 {
-	t_node	*current_a; //To store the pointer to the current `a` node
-	t_node	*target; //To store the pointer of the target node for `b` node
-	long	best_match_index; //To store the "closest bigger" number so far
+	t_node	*current_a; //puntero que nos ayudara a recorrer la pila a
+	t_node	*target; //puntero que apunta al target node en a del nodo en b
+	long	best_match_index; //variable para almacenar el numero mas grande y cercano al numero del nodo b
 
-	while (b)
+	while (b)//siempre que hayas nodos en b
 	{
-		best_match_index = LONG_MAX; //Set the current best match to the max long
-		current_a = a; //Assign the pointer to point to the current `a` node
-		while (current_a) //While the pointer is not set to NULL
+		best_match_index = LONG_MAX; //incializamos la variable con el numero long mas grande
+		current_a = a; //hacemos que el punero current_a apunte al primer nodo de la pila a
+		while (current_a) //pasamos por todos los nodos de la pila a
 		{
 			if (current_a->value > b->value 
-				&& current_a->value < best_match_index) //Check if the `a` node's value is bigger than `b` node, && smaller than the "closest bigger" so far
+				&& current_a->value < best_match_index) //si el valor del nodo al que apunta current_a es mayor que el valor del nodo al que apunta b y menor que el valor almacenado en la variable
 			{
-				best_match_index = current_a->value; //Set the best match as the value in the current `a` node
-				target = current_a; //Set `b` node's target node pointer to point to the current `a` node
+				best_match_index = current_a->value; //actualizamos el valor de best_match_index con el valor del nodo apuntado por current_a
+				target = current_a; //hacemos que el puntero target apunte al nodo de a que tiene el valor mas grande y mas cercano al valor del nodo al que apunta b
 			}
-			current_a = current_a->next; //Move to the next `a` node for processing
+			current_a = current_a->next; //nos movemos al siguiente nodo la fila a
 		}
-		if (best_match_index == LONG_MAX) //If the best match value has not changed
-			b->target = find_min(a); //Set `b` node's target node pointer to point to the smallest number in stack `a`
+		if (best_match_index == LONG_MAX) //si el valor de la variable best_match no ha cambiado (lo cual significaria que no hemos encontrado ningun nodo mayor que el nodo al que apunta b)
+			b->target = find_min(a); //actualizamos el campo target del nodo al que apunta b, para que apunta al nodo de a que tenga el valor mas pequeno
 		else
-			b->target = target; //If the best match value has been updated, then we have a target node for the current `b` node
-		b = b->next; //Move to the next `b` node for processing
+			b->target = target; //Si el valor de la variable cambio, es decir, encontramos un numero mas grande que el valor del nodo al que apunta b, actualizamos el campo target del nodo b para que apunte al nodo al que apunta el puntero target (current_a)
+		b = b->next; //nos movemos al siguiente nodo de b para hacer la misma comparacion de este con todos los nodos de a
 	}
 }
 
-void	init_nodes_b(t_node *a, t_node *b) //Define a function that prepares the nodes for pushing `b` to `a`
+void	init_nodes_b(t_node *a, t_node *b) //funcion que prepara los nodos de b para empujarlos a la pila a actualizando indices de nodos en ambas pilas y analizando los a target nodes para los nodos de b
 {
-	current_index(a);
-	current_index(b);
-	set_target_b(a, b);
+	current_index(a);//Asigna índices a los nodos de a para saber su posición actual en la pila y establece el campo above_median de cada nodo como verdadero o falso
+	current_index(b);//Asigna índices a los nodos de b para saber su posición actual en la pila y establece el campo above_median de cada nodo como verdadero o falso
+	set_target_b(a, b);//cada nodo de b busca su "objetivo" en a, es decir, el nodo en a donde debería colocarse para mantener el orden
 }

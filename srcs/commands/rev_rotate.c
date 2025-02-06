@@ -18,6 +18,7 @@ void	rra(t_node **a, bool print)//la funcion recibe un puntero doble a la cabeza
 	rev_rotate(a);
 	if (!print)
 		printf("rra\n");
+	print_piles(*a, NULL);
 }
 
 void	rrb(t_node **b, bool print)
@@ -25,6 +26,7 @@ void	rrb(t_node **b, bool print)
 	rev_rotate(b);
 	if (!print)
 		printf("rrb\n");
+	print_piles(NULL, *b);
 }
 
 void	rrr(t_node **a, t_node **b, bool print)
@@ -33,4 +35,5 @@ void	rrr(t_node **a, t_node **b, bool print)
 	rev_rotate(b);
 	if (!print)
 		printf("rrr\n");
+	print_piles(*a, *b);
 }
